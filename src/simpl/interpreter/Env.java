@@ -32,11 +32,21 @@ public class Env {
 
     public Value get(Symbol y) {
         // TODO
-        return null;
+        /*
+            Check one by one like a list
+        */
+        assert x != null;
+        if(y.toString().equals(x.toString()))
+            return v;
+        else return E.get(y);
+
     }
 
     public Env clone() {
         // TODO
-        return null;
+        /*
+            Just copy everything
+        */
+        return new Env(E, x, v);
     }
 }

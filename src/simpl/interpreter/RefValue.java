@@ -15,6 +15,11 @@ public class RefValue extends Value {
     @Override
     public boolean equals(Object other) {
         // TODO
-        return false;
+        /**
+         *  Same pointer := same address
+         */
+        if (other instanceof RefValue)
+            return ((RefValue) other).p == p;
+        else return false;
     }
 }

@@ -1,5 +1,6 @@
 package simpl.interpreter;
 
+import static simpl.interpreter.Env.empty;
 import static simpl.parser.Symbol.symbol;
 import simpl.interpreter.lib.hd;
 import simpl.interpreter.lib.tl;
@@ -12,11 +13,14 @@ import simpl.interpreter.pcf.succ;
 public class InitialState extends State {
 
     public InitialState() {
-        super(initialEnv(Env.empty), new Mem(), new Int(0));
+        super(initialEnv(empty), new Mem(), new Int(0));
     }
 
     private static Env initialEnv(Env E) {
         // TODO
-        return null;
+        /*
+            Just this Environment
+        */
+        return E;
     }
 }

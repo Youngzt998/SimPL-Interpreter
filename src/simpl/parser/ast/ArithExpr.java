@@ -15,6 +15,20 @@ public abstract class ArithExpr extends BinaryExpr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
+
+        /*
+            tr1: (t1, q1)
+            tr2: (t2, q2)
+            Target result:
+        */
+        TypeResult tr1 = l.typecheck(E);
+        TypeResult tr2 = r.typecheck(E);
+
+        // compose two substitution in two type result
+        Substitution comp = tr1.s.compose(tr2.s);
+
+
+
         return null;
     }
 }

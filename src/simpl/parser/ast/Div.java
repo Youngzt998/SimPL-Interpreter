@@ -18,6 +18,10 @@ public class Div extends ArithExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        /*
+            Check Type ?
+            Or type already checked here?
+        */
+        return new IntValue(((IntValue)l.eval(s)).n / ((IntValue)r.eval(s)).n);
     }
 }

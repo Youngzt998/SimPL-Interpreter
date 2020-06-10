@@ -22,6 +22,9 @@ public class FunValue extends Value {
     @Override
     public boolean equals(Object other) {
         // TODO
+        /**
+         *  Just return false ... ?
+         */
         return false;
     }
 }

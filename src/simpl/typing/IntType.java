@@ -20,13 +20,20 @@ final class IntType extends Type {
     @Override
     public boolean contains(TypeVar tv) {
         // TODO
+        /*
+            int type cannot contain any type
+        */
+        //
         return false;
     }
 
     @Override
     public Type replace(TypeVar a, Type t) {
         // TODO
-        return null;
+        /*
+            INT[a/t] = INT
+        */
+        return Type.INT;
     }
 
     public String toString() {

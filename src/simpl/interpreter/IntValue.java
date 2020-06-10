@@ -15,6 +15,17 @@ public class IntValue extends Value {
     @Override
     public boolean equals(Object other) {
         // TODO
-        return false;
+        /**
+         *  other must be a subtype of IntValue
+         */
+        if(other instanceof  IntValue)
+            return n == ((IntValue)other).n;
+        else
+            // TODO:
+            /*
+                Q: return false or throw exception ?
+                A: ?
+            */
+            return false;
     }
 }
