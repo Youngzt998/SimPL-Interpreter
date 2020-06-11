@@ -16,6 +16,25 @@ public class snd extends FunValue {
 
     public snd() {
         // TODO
-        super(null, null, null);
+        super(Env.empty, Symbol.symbol("snd"), getExpr());
+    }
+
+    /**
+     *  TODO
+     */
+    private static Expr getExpr(){
+        Expr e = new Expr() {
+            @Override
+            public TypeResult typecheck(TypeEnv E) throws TypeError {
+                return null;
+            }
+
+            @Override
+            public Value eval(State s) throws RuntimeError {
+                PairValue v =(PairValue) s.E.get(Symbol.symbol("snd"));
+                return v.v2;
+            }
+        };
+        return e;
     }
 }

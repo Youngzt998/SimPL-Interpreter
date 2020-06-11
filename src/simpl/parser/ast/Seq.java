@@ -26,6 +26,12 @@ public class Seq extends BinaryExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        /**
+         *  Evaluate l, then evaluate r
+         *  Note: l.eval(s) will probably change s w.r.t. l's memory operation,
+         *          so we do not worry about the memory changes in l
+         */
+        l.eval(s);
+        return r.eval(s);
     }
 }

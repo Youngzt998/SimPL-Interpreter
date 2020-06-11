@@ -36,6 +36,7 @@ public class Rec extends Expr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        RecValue v = new RecValue(s.E, x, e);
+        return e.eval(State.of(new Env(s.E, x, v), s.M, s.p));
     }
 }

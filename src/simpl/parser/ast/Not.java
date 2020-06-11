@@ -29,6 +29,6 @@ public class Not extends UnaryExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        return new BoolValue(!((BoolValue)e.eval(s)).b);
     }
 }

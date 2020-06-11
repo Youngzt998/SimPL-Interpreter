@@ -38,7 +38,10 @@ public class Env {
         assert x != null;
         if(y.toString().equals(x.toString()))
             return v;
-        else return E.get(y);
+        else if(E!=null)
+            return E.get(y);
+        else
+            return null;
 
     }
 

@@ -33,6 +33,10 @@ public class Let extends Expr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        /**
+         *
+         */
+        Value v1 = e1.eval(s);
+        return e2.eval(State.of(new Env(s.E, x, v1), s.M, s.p));
     }
 }

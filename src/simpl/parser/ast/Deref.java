@@ -1,9 +1,6 @@
 package simpl.parser.ast;
 
-import simpl.interpreter.RefValue;
-import simpl.interpreter.RuntimeError;
-import simpl.interpreter.State;
-import simpl.interpreter.Value;
+import simpl.interpreter.*;
 import simpl.typing.RefType;
 import simpl.typing.Substitution;
 import simpl.typing.Type;
@@ -31,6 +28,11 @@ public class Deref extends UnaryExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        /**
+         *  e -> v where v = (ref vp)
+         *  !e -> M(vp) where s = (E, M, p)
+         */
+        RefValue v = (RefValue) e.eval(s);
+        return s.M.get(v.p);
     }
 }

@@ -16,6 +16,26 @@ public class tl extends FunValue {
 
     public tl() {
         // TODO
-        super(null, null, null);
+        super(Env.empty, Symbol.symbol("tl"), getExpr());
+    }
+
+    private static Expr getExpr(){
+        Expr e = new Expr() {
+            @Override
+            public TypeResult typecheck(TypeEnv E) throws TypeError {
+                return null;
+            }
+
+            @Override
+            public Value eval(State s) throws RuntimeError {
+                try{
+                    ConsValue v =(ConsValue) s.E.get(Symbol.symbol("tl"));
+                    return v.v2;
+                } catch (Exception e){
+                    throw new RuntimeError("runtime error");
+                }
+            }
+        };
+        return e;
     }
 }

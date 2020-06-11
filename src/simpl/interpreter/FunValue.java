@@ -16,6 +16,7 @@ public class FunValue extends Value {
     }
 
     public String toString() {
+        // return "(fn " + x + " => " + e + ")";
         return "fun";
     }
 

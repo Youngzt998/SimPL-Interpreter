@@ -16,6 +16,22 @@ public class pred extends FunValue {
 
     public pred() {
         // TODO
-        super(null, null, null);
+        super(Env.empty, Symbol.symbol("pred"), getExpr());
+    }
+
+    private static Expr getExpr(){
+        Expr e = new Expr() {
+            @Override
+            public TypeResult typecheck(TypeEnv E) throws TypeError {
+                return null;
+            }
+
+            @Override
+            public Value eval(State s) throws RuntimeError {
+                IntValue v =(IntValue) s.E.get(Symbol.symbol("pred"));
+                return new IntValue(v.n - 1);
+            }
+        };
+        return e;
     }
 }

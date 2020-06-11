@@ -32,6 +32,16 @@ public class Loop extends Expr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        /**
+         *  if e1 evaluate to true, then evaluate e2 once (may change the State s)
+         *  else just evaluate to UnitValue
+         */
+        BoolValue v1 = (BoolValue) e1.eval(s);
+        if(v1.b){
+            e2.eval(s);
+            return new Loop(e1, e2).eval(s);
+        }
+        else
+            return Value.UNIT;
     }
 }

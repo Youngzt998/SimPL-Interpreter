@@ -27,8 +27,6 @@ public abstract class ArithExpr extends BinaryExpr {
         // compose two substitution in two type result
         Substitution comp = tr1.s.compose(tr2.s);
 
-
-
         return null;
     }
 }

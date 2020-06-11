@@ -31,6 +31,19 @@ public class Name extends Expr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        /**
+         *  If x is bounded to normal value, just get the value;                      [E-Name1]
+         *      but if x is bounded to v = (rec, E', x, e) w.r.t. (E, M, p)           [E-Name2]
+         *      we cannot just do this since (v a) cannot evaluate further,
+         *      instead, we go on evaluating rec x => e w.r.t (E', M, p).
+         */
+        Value v = s.E.get(x);
+        if (v==null)
+            throw new RuntimeError("runtime error");
+        else if (v instanceof RecValue){
+            return new Rec(((RecValue) v).x, ((RecValue) v).e).eval(State.of(((RecValue) v).E, s.M, s.p));
+        }else {
+            return v;
+        }
     }
 }

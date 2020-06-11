@@ -28,6 +28,16 @@ public class Pair extends BinaryExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        /**
+         *  Evaluate the first, then the second, then pair up them
+         *  Q: How to transport the memory change to the second one?
+         *      e.g.  ( e1:= v1, if (uop e1) then e2 else e3 )
+         *
+         *  A: l.eval(s) will probably change s w.r.t. l's memory operation,
+         *        so we do not worry about the memory changes in
+         */
+        Value v1 = l.eval(s);
+        Value v2 = r.eval(s);
+        return new PairValue(v1, v2);
     }
 }

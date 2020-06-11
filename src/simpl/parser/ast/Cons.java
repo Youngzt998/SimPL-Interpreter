@@ -29,6 +29,12 @@ public class Cons extends BinaryExpr {
     @Override
     public Value eval(State s) throws RuntimeError {
         // TODO
-        return null;
+        /**
+         *  First: evaluate the head
+         *  Second: evaluate the tail
+         */
+        Value v1 = l.eval(s);
+        Value v2 = r.eval(s);
+        return new ConsValue(v1, v2);
     }
 }
