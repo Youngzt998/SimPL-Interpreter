@@ -1,1 +1,33 @@
-5 / 2
+rec map =>
+  fn f => fn l =>
+    if l=nil
+    then nil
+    else (f (hd l))::(map f (tl l))
+
+(*
+if (not (( ((fn x => (fn y => x * y - 1))  ((fn x => 1 + x /2) 8) 2 ) % 10 ) = 9))
+then 38324 else ( ((fn x => (fn y => x * y - 1))  ((fn x => 1 + x /2) 8) 2 ) % 10 )
+,
+(not true, (ref 3, ref 3 := 4)); true andalso false orelse false
+
+;
+
+let f = fn x => x * ~5 in
+    f 7
+end
+*)
+
+
+(*
+(
+    snd (1, fst((tl (7::8::9::nil)), 3)),
+    tl ( 3 :: (pred 5) :: 5 :: (succ 5) :: nil)
+);
+(iszero 0, iszero 6);
+
+let a = (ref 10) in
+ (!a, a := 12;!a)
+end
+*)
+
+

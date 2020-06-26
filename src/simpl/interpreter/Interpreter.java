@@ -16,7 +16,7 @@ public class Interpreter {
             Parser parser = new Parser(inp);
             java_cup.runtime.Symbol parseTree = parser.parse();
             Expr program = (Expr) parseTree.value;
-            //System.out.println(program.typecheck(new DefaultTypeEnv()).t);
+            System.out.println(program.typecheck(new DefaultTypeEnv()).t);
             System.out.println(program.eval(new InitialState()));
         }
         catch (SyntaxError e) {
@@ -56,5 +56,7 @@ public class Interpreter {
         interpret("doc/examples/pcf.fibonacci.spl");
          interpret("doc/examples/pcf.twice.spl");
          interpret("doc/examples/pcf.lists.spl");
+
+//        interpret("examples(2)/letpoly.spl");
     }
 }

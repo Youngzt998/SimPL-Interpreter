@@ -22,7 +22,19 @@ public class Deref extends UnaryExpr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
-        return null;
+        TypeResult tr = e.typecheck(E);
+
+        /**
+         *      Rule CT-DEREF:
+         *      G |- e: t, q
+         *      ----------------------
+         *      G |- !e: a, q U {t = ref a}
+         */
+        RefType rt = new RefType(new TypeVar(true));
+        Substitution s = tr.t.unify(rt);
+        s = tr.s.compose(s);
+
+        return TypeResult.of(s, s.apply(rt.t));
     }
 
     @Override

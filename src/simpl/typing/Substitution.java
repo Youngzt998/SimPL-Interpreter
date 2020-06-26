@@ -10,6 +10,10 @@ public abstract class Substitution {
         public Type apply(Type t) {
             return t;
         }
+
+        public String toString(){
+            return "Id";
+        }
     }
 
     private static final class Replace extends Substitution {
@@ -24,6 +28,10 @@ public abstract class Substitution {
         public Type apply(Type b) {
             return b.replace(a, t);
         }
+
+        public String toString(){
+            return a + " = " + t;
+        }
     }
 
     private static final class Compose extends Substitution {
@@ -35,7 +43,14 @@ public abstract class Substitution {
         }
 
         public Type apply(Type t) {
-            return f.apply(g.apply(t));
+            /**
+             *  The sequence is principle
+             */
+            return g.apply(f.apply(t));
+        }
+
+        public String toString(){
+            return f + ", " + g;
         }
     }
 

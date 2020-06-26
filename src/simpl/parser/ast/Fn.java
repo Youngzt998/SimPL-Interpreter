@@ -29,7 +29,23 @@ public class Fn extends Expr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
-        return null;
+
+        /**
+         *      Rule CT-FN
+         *      G, x:a |- e:t, q
+         *      -------------------------------------
+         *      G |- fn x => e : a -> t, q
+         *
+         *      e.g.
+         *      ., x: a |- x + 1: int, {a = int}
+         *      --------------------------
+         *      .|- fn x => x + 1: int -> int, {a = int}
+         */
+        TypeVar a = new TypeVar(true);
+        TypeResult tr = e.typecheck(TypeEnv.of(E, x, a));
+        ArrowType arrow = new ArrowType(tr.s.apply(a), tr.s.apply(tr.t));
+
+        return TypeResult.of(tr.s, arrow);
     }
 
     @Override

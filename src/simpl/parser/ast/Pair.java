@@ -4,10 +4,7 @@ import simpl.interpreter.PairValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
-import simpl.typing.PairType;
-import simpl.typing.TypeEnv;
-import simpl.typing.TypeError;
-import simpl.typing.TypeResult;
+import simpl.typing.*;
 
 public class Pair extends BinaryExpr {
 
@@ -22,7 +19,20 @@ public class Pair extends BinaryExpr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
-        return null;
+        /**
+         *
+         */
+        TypeResult tr1 = l.typecheck(E);
+        TypeEnv NewE = tr1.s.compose(E);
+        TypeResult tr2 = r.typecheck(NewE);
+
+        /**
+         *      Rule CT-PAIR:
+         *      ...
+         */
+        Substitution comp = tr2.s.compose(tr1.s);
+
+        return TypeResult.of(comp, new PairType(comp.apply(tr1.t), comp.apply(tr2.t)));
     }
 
     @Override

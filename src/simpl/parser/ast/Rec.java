@@ -30,7 +30,17 @@ public class Rec extends Expr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
-        return null;
+        /**
+         *      Rule CT-REC:
+         *      G, x: a |- e: t, q
+         *      -------------------------------
+         *      G |- rec x => e: t, q
+         */
+        TypeVar a = new TypeVar(true);
+        TypeResult tr = e.typecheck(TypeEnv.of(E, x, a));
+        Substitution s = tr.t.unify(a);
+        s = tr.s.compose(s);
+        return TypeResult.of(tr.s, s.apply(tr.t));
     }
 
     @Override

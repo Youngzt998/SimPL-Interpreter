@@ -28,7 +28,28 @@ public class App extends BinaryExpr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
-        return null;
+        /**
+         *  Same as ArithExpr.java
+         */
+        TypeResult tr1 = l.typecheck(E);
+        TypeEnv NewE = tr1.s.compose(E);
+        TypeResult tr2 = r.typecheck(NewE);
+
+        /**
+         *      We get: [G |- l: T1, q1] and [G |- r: T2, q2]
+         *
+         *      Rules CT-APP
+         *      G |- l: t1, q1    G |- r: t2, q2
+         *      --------------------------------------
+         *      G |- l r : a, q1 U q2 U {t1 = t2 -> a}
+         */
+        Substitution comp = tr2.s.compose(tr1.s);
+        ArrowType arrow = new ArrowType(comp.apply(tr2.t), new TypeVar(true));
+        Substitution s = comp.apply(tr1.t).unify(arrow);
+        comp = comp.compose(s);
+
+        return TypeResult.of(comp, comp.apply(arrow.t2));   //TODO
+
     }
 
     @Override

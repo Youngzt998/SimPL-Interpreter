@@ -1,0 +1,8 @@
+let a = fn x => x in 
+    let b = a 1 in 
+        let c = a false in 
+            if c then b else 0
+        end
+    end
+end
+(* ==> 0 *)

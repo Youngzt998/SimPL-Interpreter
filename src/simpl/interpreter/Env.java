@@ -32,7 +32,7 @@ public class Env {
 
     public Value get(Symbol y) {
         // TODO
-        /*
+        /**
             Check one by one like a list
         */
         assert x != null;
@@ -47,7 +47,7 @@ public class Env {
 
     public Env clone() {
         // TODO
-        /*
+        /**
             Just copy everything
         */
         return new Env(E, x, v);

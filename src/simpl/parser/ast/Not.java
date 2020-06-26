@@ -23,7 +23,16 @@ public class Not extends UnaryExpr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
-        return null;
+        /**
+         *  Rule CT-NOT:
+         *      G |- e: t, q
+         *      --------------------------------
+         *      G |- Not e: bool, q U {t = bool}
+         */
+        TypeResult tr = e.typecheck(E);
+        Substitution s = tr.t.unify(Type.BOOL);
+
+        return TypeResult.of(tr.s.compose(s), Type.BOOL);
     }
 
     @Override

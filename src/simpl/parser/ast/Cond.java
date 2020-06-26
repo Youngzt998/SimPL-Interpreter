@@ -27,7 +27,28 @@ public class Cond extends Expr {
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
-        return null;
+        /**
+         *
+         */
+        TypeResult tr1 = e1.typecheck(E);
+        TypeEnv NewE1 = tr1.s.compose(E);
+        TypeResult tr2 = e2.typecheck(NewE1);
+        TypeEnv NewE2 = tr2.s.compose(NewE1);
+        TypeResult tr3 = e3.typecheck(NewE2);
+        Substitution comp =tr3.s.compose(tr2.s.compose(tr1.s));
+
+        /**
+         *      Rule CT-COND:
+         *      G |- e1: t1, q1    G |- e2: t2, q2    G |- e3: t3, q3
+         *      -----------------------------------------------------
+         *      G |- if e1 then e2 else e3: t3, q1 U q2 U q3 U {t1 = bool} U {t2 = t3}
+         */
+        Substitution s1 = comp.apply(tr1.t).unify(Type.BOOL);
+        comp = comp.compose(s1);
+        Substitution s2 = comp.apply(tr2.t).unify(comp.apply(tr3.t));
+        comp = comp.compose(s2);
+
+        return TypeResult.of(comp, comp.apply(tr3.t));
     }
 
     @Override
