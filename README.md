@@ -1,10 +1,16 @@
 # SimPL-Interpreter
 
+Ziteng Yang
+
+
+
 ## 1. Overview
 
 This is the implementation document of an interpreter for the programming language SimPL (pronounced simple),  which is a simplified dialect of ML and can be used for both functional and imperative programming.
 
 See [project.pdf](./project.pdf) for the specification of this language and the original goals.
+
+The project has been uploaded to https://github.com/Youngzt998/SimPL-Interpreter
 
 
 
@@ -700,12 +706,4 @@ public class fst extends FunValue {
 
 }
 ```
-
-
-
-
-
-### 4. Garbage Collection
-
-
 

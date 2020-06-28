@@ -30,7 +30,7 @@ public class Interpreter {
             try{
                 System.out.println(program.eval(new InitialState()));
             }catch (StackOverflowError e){
-                throw new RuntimeError("runtime error");
+                throw new RuntimeError("runtime error: system memory not enough");
             }
 
         }
