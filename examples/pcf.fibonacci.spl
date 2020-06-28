@@ -9,6 +9,6 @@ in
 		else
 		  plus (f (pred n)) (f (pred (pred n)))
   in
-    fibonacci 20
+    fibonacci 10
   end
 end
