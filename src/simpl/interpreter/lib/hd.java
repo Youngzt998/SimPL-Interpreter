@@ -7,6 +7,7 @@ import simpl.parser.ast.Expr;
 import simpl.typing.TypeEnv;
 import simpl.typing.TypeError;
 import simpl.typing.TypeResult;
+import simpl.typing.TypeVar;
 
 public class hd extends FunValue {
 
@@ -18,8 +19,14 @@ public class hd extends FunValue {
     private static Expr getExpr(){
         Expr e = new Expr() {
             @Override
+            public Expr replace(Symbol x, Expr e) {
+                return this;
+            }
+
+
+            @Override
             public TypeResult typecheck(TypeEnv E) throws TypeError {
-                return null;
+                return TypeResult.of(new TypeVar(true));
             }
 
             @Override

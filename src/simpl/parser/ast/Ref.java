@@ -1,6 +1,7 @@
 package simpl.parser.ast;
 
 import simpl.interpreter.*;
+import simpl.parser.Symbol;
 import simpl.typing.RefType;
 import simpl.typing.TypeEnv;
 import simpl.typing.TypeError;
@@ -15,6 +16,11 @@ public class Ref extends UnaryExpr {
     public String toString() {
         return "(ref " + e + ")";
     }
+
+    public Ref replace(Symbol x, Expr e) {
+        return new Ref(this.e.replace(x, e));
+    }
+
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {

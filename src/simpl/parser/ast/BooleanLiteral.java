@@ -4,6 +4,7 @@ import simpl.interpreter.BoolValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.Type;
 import simpl.typing.TypeEnv;
 import simpl.typing.TypeError;
@@ -20,6 +21,13 @@ public class BooleanLiteral extends Expr {
     public String toString() {
         return "" + b;
     }
+
+
+    @Override
+    public BooleanLiteral replace(Symbol x, Expr e) {
+        return this;
+    }
+
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {

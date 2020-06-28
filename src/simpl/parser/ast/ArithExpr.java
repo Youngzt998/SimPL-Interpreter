@@ -1,6 +1,10 @@
 package simpl.parser.ast;
 
 import com.sun.org.apache.xalan.internal.xsltc.compiler.util.IntType;
+import simpl.interpreter.RuntimeError;
+import simpl.interpreter.State;
+import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.Substitution;
 import simpl.typing.Type;
 import simpl.typing.TypeEnv;
@@ -12,6 +16,7 @@ public abstract class ArithExpr extends BinaryExpr {
     public ArithExpr(Expr l, Expr r) {
         super(l, r);
     }
+
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {

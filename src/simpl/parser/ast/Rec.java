@@ -27,6 +27,12 @@ public class Rec extends Expr {
         return "(rec " + x + "." + e + ")";
     }
 
+    public Rec replace(Symbol x, Expr e) {
+        if(this.x.toString().equals(x.toString()))
+            return this;
+        else return new Rec(this.x, this.e.replace(x, e));
+    }
+
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
@@ -47,6 +53,11 @@ public class Rec extends Expr {
     public Value eval(State s) throws RuntimeError {
         // TODO
         RecValue v = new RecValue(s.E, x, e);
-        return e.eval(State.of(new Env(s.E, x, v), s.M, s.p));
+//        try {
+            return e.eval(State.of(new Env(s.E, x, v), s.M, s.p));
+//        }catch (StackOverflowError e){
+//            throw new RuntimeError("runtime error: stack overflow");
+//        }
+
     }
 }

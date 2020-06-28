@@ -5,6 +5,7 @@ import simpl.interpreter.IntValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 
 public class Greater extends RelExpr {
 
@@ -15,6 +16,13 @@ public class Greater extends RelExpr {
     public String toString() {
         return "(" + l + " > " + r + ")";
     }
+
+
+    @Override
+    public Greater replace(Symbol x, Expr e) {
+        return new Greater(l.replace(x, e), r.replace(x, e));
+    }
+
 
     @Override
     public Value eval(State s) throws RuntimeError {

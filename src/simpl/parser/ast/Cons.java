@@ -4,6 +4,7 @@ import simpl.interpreter.ConsValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.*;
 
 public class Cons extends BinaryExpr {
@@ -14,6 +15,12 @@ public class Cons extends BinaryExpr {
 
     public String toString() {
         return "(" + l + " :: " + r + ")";
+    }
+
+
+    @Override
+    public Cons replace(Symbol x, Expr e) {
+        return new Cons(l.replace(x, e), r.replace(x, e));
     }
 
     @Override

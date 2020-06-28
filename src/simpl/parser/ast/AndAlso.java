@@ -4,6 +4,7 @@ import simpl.interpreter.BoolValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.Substitution;
 import simpl.typing.Type;
 import simpl.typing.TypeEnv;
@@ -18,6 +19,11 @@ public class AndAlso extends BinaryExpr {
 
     public String toString() {
         return "(" + l + " andalso " + r + ")";
+    }
+
+    @Override
+    public AndAlso replace(Symbol x, Expr e) {
+        return new AndAlso(l.replace(x, e), r.replace(x, e));
     }
 
     @Override

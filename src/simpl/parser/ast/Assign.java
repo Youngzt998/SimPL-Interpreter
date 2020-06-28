@@ -4,6 +4,7 @@ import simpl.interpreter.RefValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.*;
 
 public class Assign extends BinaryExpr {
@@ -15,6 +16,13 @@ public class Assign extends BinaryExpr {
     public String toString() {
         return l + " := " + r;
     }
+
+
+    @Override
+    public Assign replace(Symbol x, Expr e) {
+        return new Assign(l.replace(x, e), r.replace(x, e));
+    }
+
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {

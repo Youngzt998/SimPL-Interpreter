@@ -3,6 +3,7 @@ package simpl.parser.ast;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.Substitution;
 import simpl.typing.TypeEnv;
 import simpl.typing.TypeError;
@@ -17,6 +18,11 @@ public class Seq extends BinaryExpr {
     public String toString() {
         return "(" + l + " ; " + r + ")";
     }
+
+    public Seq replace(Symbol x, Expr e) {
+        return new Seq(l.replace(x, e), r.replace(x, e));
+    }
+
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {

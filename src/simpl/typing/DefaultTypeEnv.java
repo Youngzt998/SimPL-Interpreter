@@ -13,7 +13,7 @@ public class DefaultTypeEnv extends TypeEnv {
          */
         E = new TypeEnv() {
             @Override
-            public Type get(Symbol x) {
+            public Type get(Symbol x) throws TypeError {
                 if (x.toString().equals("fst")){
 
                     TypeVar tv1 = new TypeVar(true);
@@ -39,14 +39,19 @@ public class DefaultTypeEnv extends TypeEnv {
                     return new ArrowType(Type.INT, Type.INT);
                 } else if (x.toString().equals("succ")){
                     return new ArrowType(Type.INT, Type.INT);
-                } else return null;
+                } else throw new TypeError("variable not found in current environment");
 
             }
         };
     }
 
     @Override
-    public Type get(Symbol x) {
-        return E.get(x);
+    public Type get(Symbol x) throws TypeError {
+        try {
+            return E.get(x);
+        }catch (TypeError e){
+            throw e;
+        }
+
     }
 }

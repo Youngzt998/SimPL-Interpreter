@@ -25,18 +25,53 @@ public class Let extends Expr {
         return "(let " + x + " = " + e1 + " in " + e2 + ")";
     }
 
+
+    @Override
+    public Let replace(Symbol x, Expr e) {
+        /**
+         *  (Let x = e1 in e2)[e/x]
+         *      ==> Let x = e1[e/x] in e2
+         *  (Let y = e1 in e2)
+         *      ==> Let y = e1[e/x] in e2[e/x]
+         */
+        if (this.x.toString().equals(x.toString()))
+            return new Let(this.x, e1.replace(x, e), e2);
+        else return new Let(this.x, e1.replace(x, e), e2.replace(x, e));
+    }
+
+
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
         /**
+
+        /**
+         *  New version: enable Let-Polymorphysm!
+         *
+         *  Rule CT-LETPOLY:
+         *      G |- e2[e1/x]: t2, q   G|- e1: t1
+         *      ---------------------------------
+         *      G |- let x = e1 in e2 end: t2, q
+         */
+
+        TypeResult trSingle = e1.typecheck(E);
+        TypeResult tr = e2.replace(x, e1).typecheck(E);
+
+        return TypeResult.of(tr.s, tr.s.apply(tr.t));
+
+        /**
+         *  Old version: Let-Polymorphysm not enabled
+         *
+         *  TypeResult tr1 = e1.typecheck(E);
+         *         TypeEnv NewE = tr1.s.compose(TypeEnv.of(E, x, tr1.t));
+         *         TypeResult tr2 = e2.typecheck(NewE);
+         *         Substitution comp =tr2.s.compose(tr1.s);
+         *
+         *         return TypeResult.of(comp, comp.apply(tr2.t));
          *
          */
-        TypeResult tr1 = e1.typecheck(E);
-        TypeEnv NewE = tr1.s.compose(TypeEnv.of(E, x, tr1.t));
-        TypeResult tr2 = e2.typecheck(NewE);
-        Substitution comp =tr2.s.compose(tr1.s);
 
-        return TypeResult.of(comp, comp.apply(tr2.t));
+
     }
 
     @Override

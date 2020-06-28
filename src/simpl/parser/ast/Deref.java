@@ -1,6 +1,7 @@
 package simpl.parser.ast;
 
 import simpl.interpreter.*;
+import simpl.parser.Symbol;
 import simpl.typing.RefType;
 import simpl.typing.Substitution;
 import simpl.typing.Type;
@@ -18,6 +19,13 @@ public class Deref extends UnaryExpr {
     public String toString() {
         return "!" + e;
     }
+
+
+    @Override
+    public Deref replace(Symbol x, Expr e) {
+        return new Deref(this.e.replace(x, e));
+    }
+
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {

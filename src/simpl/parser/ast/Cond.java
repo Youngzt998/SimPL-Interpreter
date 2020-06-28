@@ -4,6 +4,7 @@ import simpl.interpreter.BoolValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.Substitution;
 import simpl.typing.Type;
 import simpl.typing.TypeEnv;
@@ -22,6 +23,11 @@ public class Cond extends Expr {
 
     public String toString() {
         return "(if " + e1 + " then " + e2 + " else " + e3 + ")";
+    }
+
+    @Override
+    public Cond replace(Symbol x, Expr e) {
+        return new Cond(e1.replace(x, e), e2.replace(x, e), e3.replace(x, e));
     }
 
     @Override

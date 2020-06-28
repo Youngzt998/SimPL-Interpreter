@@ -1,6 +1,7 @@
 package simpl.parser.ast;
 
 import simpl.interpreter.*;
+import simpl.parser.Symbol;
 
 public class Add extends ArithExpr {
 
@@ -10,6 +11,13 @@ public class Add extends ArithExpr {
 
     public String toString() {
         return "(" + l + " + " + r + ")";
+    }
+
+    @Override
+    public Add replace(Symbol x, Expr e) {
+        Add add = new Add(l.replace(x, e), r.replace(x, e));
+        return add;
+//        return new Add(l.replace(x, e), r.replace(x, e));
     }
 
     @Override

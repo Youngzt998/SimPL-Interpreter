@@ -4,6 +4,7 @@ import simpl.interpreter.PairValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.*;
 
 public class Pair extends BinaryExpr {
@@ -14,6 +15,10 @@ public class Pair extends BinaryExpr {
 
     public String toString() {
         return "(pair " + l + " " + r + ")";
+    }
+
+    public Pair replace(Symbol x, Expr e) {
+        return new Pair(l.replace(x, e), r.replace(x, e));
     }
 
     @Override

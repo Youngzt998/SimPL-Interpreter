@@ -9,11 +9,18 @@ public class ConsValue extends Value {
         this.v2 = v2;
     }
 
+    private int length(){
+        if (v2 instanceof ConsValue)
+            return 1 + ((ConsValue) v2).length();
+        else return 1;
+    }
+
     public String toString() {
         // TODO
         /**
          *  v1 :: v2 :: ... :: vn :: Nil
          */
+
         return v1.toString() + "::" + v2.toString();
     }
 

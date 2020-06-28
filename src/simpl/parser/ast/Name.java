@@ -22,6 +22,15 @@ public class Name extends Expr {
         return "" + x;
     }
 
+
+    public Expr replace(Symbol x, Expr e) {
+        if(this.x.toString().equals(x.toString()))
+            return e;
+        else return this;
+
+    }
+
+
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO

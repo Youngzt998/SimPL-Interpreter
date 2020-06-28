@@ -4,6 +4,7 @@ import simpl.interpreter.IntValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.Substitution;
 import simpl.typing.Type;
 import simpl.typing.TypeEnv;
@@ -19,6 +20,12 @@ public class Neg extends UnaryExpr {
     public String toString() {
         return "~" + e;
     }
+
+
+    public Neg replace(Symbol x, Expr e) {
+        return new Neg(this.e.replace(x, e));
+    }
+
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {

@@ -25,6 +25,13 @@ public class App extends BinaryExpr {
         return "(" + l + " " + r + ")";
     }
 
+
+    @Override
+    public App replace(Symbol x, Expr e) {
+        return new App(l.replace(x, e), r.replace(x, e));
+    }
+
+
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO

@@ -4,6 +4,7 @@ import simpl.interpreter.BoolValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 import simpl.typing.Substitution;
 import simpl.typing.Type;
 import simpl.typing.TypeEnv;
@@ -22,6 +23,11 @@ public class Loop extends Expr {
     public String toString() {
         return "(while " + e1 + " do " + e2 + ")";
     }
+
+    public Loop replace(Symbol x, Expr e) {
+        return new Loop(e1.replace(x, e), e2.replace(x, e));
+    }
+
 
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
@@ -51,7 +57,12 @@ public class Loop extends Expr {
         BoolValue v1 = (BoolValue) e1.eval(s);
         if(v1.b){
             e2.eval(s);
-            return new Loop(e1, e2).eval(s);
+            try{
+                return new Loop(e1, e2).eval(s);
+            }catch (StackOverflowError e){
+                throw new RuntimeError("runtime error: stack overflow");
+            }
+
         }
         else
             return Value.UNIT;

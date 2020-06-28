@@ -4,6 +4,7 @@ import simpl.interpreter.IntValue;
 import simpl.interpreter.RuntimeError;
 import simpl.interpreter.State;
 import simpl.interpreter.Value;
+import simpl.parser.Symbol;
 
 public class Mul extends ArithExpr {
 
@@ -14,6 +15,12 @@ public class Mul extends ArithExpr {
     public String toString() {
         return "(" + l + " * " + r + ")";
     }
+
+
+    public Mul replace(Symbol x, Expr e) {
+        return new Mul(l.replace(x, e), r.replace(x, e));
+    }
+
 
     @Override
     public Value eval(State s) throws RuntimeError {

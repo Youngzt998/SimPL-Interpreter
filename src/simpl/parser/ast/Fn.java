@@ -26,6 +26,16 @@ public class Fn extends Expr {
         return "(fn " + x + "." + e + ")";
     }
 
+
+    @Override
+    public Fn replace(Symbol x, Expr e) {
+        if(this.x.toString().equals(x.toString())){
+            return this;
+        }
+        else return new Fn(this.x, this.e.replace(x, e));
+    }
+
+
     @Override
     public TypeResult typecheck(TypeEnv E) throws TypeError {
         // TODO
