@@ -1,8 +1,133 @@
-rec map =>
-  fn f => fn l =>
-    if l=nil
-    then nil
-    else (f (hd l))::(map f (tl l))
+
+(* (rec map =>
+   fn f => fn l =>
+     if l=nil
+     then nil
+     else (f (hd l))::(map f (tl l)))
+(fn f => f 1)
+((fn x => x + 1)::(fn x => x * 5)::nil)
+ *)
+
+
+(*
+let f = fn x => x in
+    let a = f 1 in
+         a
+    end
+end
+,
+let k =
+    fn x => x j
+in k end
+*)
+
+
+let f = fn x => x in
+    let a = f 1 in
+        let b = f false in
+            let c = f (1 :: 2 :: nil) in
+                let d = f (true :: false :: nil) in
+                    let e = f false in
+                        let g = f (1, true) in
+                            let e = f (fn x => (x, x)) in
+                                (a, (b, (c, (d, (e, g)))))
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
+;
+let f =
+    let g =
+        let h =
+            let a =
+                let b =
+                    let c =
+                        let d =
+                            let e =
+                                let f =
+                                    let g =
+                                        let h =
+                                            let i =
+                                                let j =
+                                                    let k =
+                                                        fn x => x
+                                                    in k end
+                                                in j end
+                                            in i end
+                                        in h end
+                                    in g end
+                                in f end
+                            in e end
+                        in d end
+                    in c end
+                in b end
+            in a end
+        in h end
+    in g end
+in f end
+
+let f =
+    let g =
+        let h =
+            let a =
+                let b =
+                    let c =
+                        let d =
+                            let e =
+                                let f =
+                                    let g =
+                                        let h =
+                                            let i =
+                                                let j =
+                                                    let k =
+                                                        let l =
+                                                            let m =
+                                                                let n =
+                                                                    fn x => x
+                                                                in n end
+                                                            in m end
+                                                        in l end
+                                                    in k end
+                                                in j end
+                                            in i end
+                                        in h end
+                                    in g end
+                                in f end
+                            in e end
+                        in d end
+                    in c end
+                in b end
+            in a end
+        in h end
+    in g end
+in f end
+;
+let a = ref 9 in
+     a:= 11;(ref 10, !a)
+end
+;
+ref ref ref 10
+
+
+(*
+let
+    twice = fn f => fn x => f (f x)
+in
+    twice twice twice twice twice twice twice
+    twice twice twice twice twice twice twice
+    twice twice twice twice twice twice twice
+    twice twice twice twice twice twice twice
+    twice twice twice twice twice twice twice
+    twice twice twice twice twice twice twice
+    twice twice twice twice twice twice twice
+    twice twice twice twice twice twice twice
+end
+(* evaluation causes stack overflow *)
+*)
 
 (*
 if (not (( ((fn x => (fn y => x * y - 1))  ((fn x => 1 + x /2) 8) 2 ) % 10 ) = 9))

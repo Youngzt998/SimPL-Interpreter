@@ -15,9 +15,7 @@ public class Add extends ArithExpr {
 
     @Override
     public Add replace(Symbol x, Expr e) {
-        Add add = new Add(l.replace(x, e), r.replace(x, e));
-        return add;
-//        return new Add(l.replace(x, e), r.replace(x, e));
+        return new Add(l.replace(x, e), r.replace(x, e));
     }
 
     @Override
